@@ -8,6 +8,7 @@ The application can be run on JSBin, JSFiddle or any other online/offline editor
 # Reference Material can be found here
 
 [Vue.js Official Documentation](https://vuejs.org/v2/guide/)
+
 [Live Application on JSBin](https://jsbin.com/wefahesije/edit?html,output)
 
 Feel free to fork, play and expand this application to help your understanding of Vue.js
