@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <div id="app">
+    
+    <div class="list-wrapper">
+      <h1>{{ message }} </h1>
+      <br/>
+      
+      <h2>Enter max calorie amount to see results.</h2>
+      <input type="number" v-model.number="maxCal" placeholder="Enter as 603, 700, etc ">
+      
+      <ul class="list" v-if="maxCal >= 1">
+        <li v-for="(recipe, index) in recipes" v-if="recipe.calories < maxCal">
+          <h2>{{recipe.name}}</h2>
+          <button @click="showCalories(recipe)" v-if="recipe.show"> Hide Calories</button>
+          <button @click="showCalories(recipe)" v-else> Show Calories</button>
+          <p v-show="recipe.show"> {{recipe.calories | addCals}}</p>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script>
+    
+    // Sample example of using filter to work with value before render
+    // In this case, it is used to add context. Although it is better suited for adding logic
+    Vue.filter('addCals', function(calories){
+        return calories + ' calories'
+    })
+    
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Recipes ',
+        maxCal: null,
+        showCals: false,
+        recipes: [
+          {name:'lasagna', calories: 500, show: false},
+          {name:'ceviche', calories: 602, show: false},
+          {name:'pasta', calories: 698, show: false},
+          {name:'pizza', calories: 807, show: false}
+        ]
+      },
+      methods: {
+        showCalories (recipe) {
+            recipe.show = !recipe.show
+          }
+      }
+    })
+  </script>
+  <style>
+    #app{
+      background-color: #ffffff;
+      height: 800px;
+      padding: 20px;
+    }
+    .list-wrapper h1{
+      height: 50px;
+      background: #009688;
+      padding-top: 10px;
+      padding-left: 11px;
+      color: #ffffff;
+      box-shadow: 0 4px 7px #b6b6b6;
+    }
+    h2 {
+      color: #00422e;
+      margin-left:20px;
+    }
+    input{
+     text-align: center;
+     padding: 4px;
+     margin-left: 20px;
+    }
+    /* Card */
+    .list > li {
+      border:solid 1px gray;
+      height: 200px;
+      width: 44%;
+      margin: 1%;
+      float: left;
+      padding: 10px;
+      box-shadow: 3px 3px 8px gray;
+      list-style-type: none;
+      color: #00422e;
+      text-transform: capitalize;
+        
+    }
+    .list > li > button{
+      color: white;
+      background: #009688;
+      padding: 4px;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 1px 1px 3px #0b5e56;
+      outline: none;
+    }
+  </style>
+</html>
